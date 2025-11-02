@@ -24,3 +24,16 @@ a. Create a split terminal
 b. Build sharu
 c. "npm start" in server folder.
 d. "npx http-server -c-1 dist/sharu/browser -P http://localhost:8080?" in sharu folder
+
+Hosted the PWA on Render (for backend) and Netlify (Angular frontend)
+
+Backend link: "https://sharu.onrender.com"
+WebApp link: "https://sharu-pwa.netlify.app/"
+
+Lighthouse report is attached.
+
+Performance: 99
+Accessbility: 100
+Best Practice: 100
+SEO : 100
+PWA : 100% Confirmed
