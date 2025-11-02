@@ -1,0 +1,45 @@
+<div class="dashboard-container">
+
+    <h2 *ngIf="summary">{{ summary.welcomeMessage }}</h2>
+    <h2 *ngIf="!summary && !isLoading">Employee Dashboard</h2>
+
+    <div *ngIf="isLoading" class="loading-message">
+        <p>Loading your personalized dashboard...</p>
+    </div>
+
+    <div *ngIf="error" class="error-message">
+        <p>{{ error }}</p>
+    </div>
+
+    <div *ngIf="summary && !isLoading" class="dashboard-grid">
+
+        <div class="summary-card tasks-card">
+            <div class="card-icon">✅</div>
+            <h3>Pending To-do Tasks</h3>
+            <p class="metric-value">{{ summary.pendingTasks | number }}</p>
+            <a routerLink="/todo" class="card-link">View To-Do List &rarr;</a>
+        </div>
+
+        <div class="summary-card hours-card">
+            <div class="card-icon">⏱️</div>
+            <h3>Hours Logged This Month</h3>
+            <p class="metric-value">{{ summary.monthlyHours | number:'1.1-1' }}</p>
+            <a routerLink="/timesheet" class="card-link">Log New Hours &rarr;</a>
+        </div>
+
+        <div class="summary-card activity-card">
+            <div class="card-icon">📜</div>
+            <h3>Recent Activity</h3>
+            <ul *ngIf="summary.recentActivities && summary.recentActivities.length > 0" class="activity-list">
+                <li *ngFor="let activity of summary.recentActivities">
+                    <span class="activity-time">{{ activity.timestamp | date:'shortTime' }}</span>:
+                    {{ activity.action }}
+                </li>
+            </ul>
+            <p *ngIf="!summary.recentActivities || summary.recentActivities.length === 0" class="no-activity">No recent
+                actions recorded.</p>
+            <a routerLink="/logs" class="card-link">View Full Log &rarr;</a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="blog-container">
+    <h2>📝 Blog Posts</h2>
+
+    <div *ngIf="isLoading" class="loading-message">Loading blog posts...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div *ngIf="isAddingNewPost" class="new-post-form-section">
+        <h3>New Blog Post</h3>
+        <form (ngSubmit)="submitNewPost()">
+            <input [(ngModel)]="newPostTitle" name="title" placeholder="Post Title" class="post-title-input" required>
+            <textarea [(ngModel)]="newPostContent" name="content" placeholder="Write your blog content here..."
+                class="post-content-textarea" required></textarea>
+            <button type="submit" [disabled]="!newPostTitle.trim() || !newPostContent.trim() || isSubmitting">
+                <span *ngIf="!isSubmitting">Publish Post</span>
+                <span *ngIf="isSubmitting">Publishing...</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="tabs" *ngIf="!isAddingNewPost && !isLoading">
+        <button [class.active]="activeTab === 'all'" (click)="switchTab('all')">All Blogs</button>
+        <button [class.active]="activeTab === 'my'" (click)="switchTab('my')">My Posts</button>
+    </div>
+
+    <div class="blog-list" *ngIf="!isAddingNewPost && !isLoading">
+        <ng-container *ngIf="activeTab === 'all'">
+            <div *ngIf="allBlogs.length; else noAllBlogs" class="posts-grid">
+                <div *ngFor="let blog of allBlogs" class="blog-card">
+                    <h3>{{ blog.title }}</h3>
+                    <p class="blog-meta">By **{{ blog.authorName }}** on {{ blog.createdAt | date:'mediumDate' }}</p>
+                    <p class="blog-preview">{{ blog.content.substring(0, 150) }}<span
+                            *ngIf="blog.content.length > 150">...</span></p>
+                </div>
+            </div>
+            <ng-template #noAllBlogs>
+                <p class="empty-message">No blog posts found yet.</p>
+            </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="activeTab === 'my'">
+            <div *ngIf="myBlogs.length; else noMyBlogs" class="posts-grid">
+                <div *ngFor="let blog of myBlogs" class="blog-card my-post">
+                    <button class="delete-button" (click)="deletePost(blog._id)" title="Delete Post">🗑️</button>
+                    <h3>
+                        {{ blog.title }}
+                        <span *ngIf="!isOnline" class="status-tag" [ngClass]="isSynced(blog) ? 'synced' : 'offline'">
+                            {{ isSynced(blog) ? 'Synced' : 'Offline' }}
+                        </span>
+                    </h3>
+                    <p class="blog-meta">Posted on {{ blog.createdAt | date:'mediumDate' }}</p>
+                    <p class="blog-preview">{{ blog.content.substring(0, 150) }}<span
+                            *ngIf="blog.content.length > 150">...</span></p>
+                </div>
+            </div>
+            <ng-template #noMyBlogs>
+                <p class="empty-message">You haven't posted any blogs yet. Click 'Post' to create one!</p>
+            </ng-template>
+        </ng-container>
+    </div>
+</div>
+
+<button class="fab" (click)="toggleAddPostForm()"
+    [attr.aria-label]="isAddingNewPost ? 'Close form' : 'Post a new blog'">
+    {{ isAddingNewPost ? '❌' : '➕ Post' }}
+</button>

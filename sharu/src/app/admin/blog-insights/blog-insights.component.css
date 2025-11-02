@@ -1,0 +1,122 @@
+.insights-container {
+    padding: 30px;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+h2 {
+    color: #1976d2;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.loading-message,
+.error-message {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.insight-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid;
+    transition: transform 0.2s;
+}
+
+.insight-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Color Coding for Cards */
+.insight-card.total {
+    border-left-color: #28a745;
+}
+
+.insight-card.authors {
+    border-left-color: #ffc107;
+}
+
+.insight-card.top-bloggers {
+    border-left-color: #dc3545;
+}
+
+.insight-card.trend {
+    border-left-color: #007bff;
+}
+
+
+.insight-card h3 {
+    margin-top: 0;
+    color: #343a40;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 10px 0 15px;
+    color: #1976d2;
+}
+
+.metric-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.ranking-list,
+.trend-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.ranking-list li,
+.trend-list li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.ranking-list li:last-child,
+.trend-list li:last-child {
+    border-bottom: none;
+}
+
+.rank {
+    font-weight: 700;
+    color: #1976d2;
+    margin-right: 10px;
+}
+
+.count {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.no-data-message {
+    font-style: italic;
+    color: #999;
+    margin-top: 10px;
+}

@@ -1,0 +1,57 @@
+<div class="timesheet-container">
+    <h2>⏱️ Time Sheet & Hours Log</h2>
+
+    <div *ngIf="isLoading" class="loading-message">Loading timesheet history...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div class="timesheet-grid">
+
+        <div class="entry-form-card">
+            <h3>Log New Hours</h3>
+            <form (ngSubmit)="submitTimesheetEntry()">
+
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" [(ngModel)]="newEntry.date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="task">Task Description:</label>
+                    <input type="text" id="task" [(ngModel)]="newEntry.taskDescription" name="task" required
+                        placeholder="Project work, meeting, training, etc.">
+                </div>
+
+                <div class="form-group hours-group">
+                    <label for="hours">Hours Logged:</label>
+                    <input type="number" id="hours" [(ngModel)]="newEntry.hours" name="hours" min="0.5" step="0.5"
+                        required>
+                </div>
+
+                <button type="submit" [disabled]="isSubmitting || newEntry.hours <= 0">
+                    <span *ngIf="!isSubmitting">Submit Hours</span>
+                    <span *ngIf="isSubmitting">Submitting...</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="history-card">
+            <h3>Hours History</h3>
+
+            <div *ngIf="timesheets.length === 0 && !isLoading" class="no-history-message">
+                No hours have been logged yet.
+            </div>
+
+            <ul *ngIf="timesheets.length > 0" class="history-list">
+                <li *ngFor="let entry of timesheets" class="history-item">
+                    <div class="history-date">{{ entry.date | date:'mediumDate' }}</div>
+                    <div class="history-details">
+                        <span class="history-task">{{ entry.taskDescription }}</span>
+                        <span class="history-hours">{{ entry.hours | number:'1.1-1' }} hrs</span>
+                        <span *ngIf="entry.synced === false && !isOnline()" class="status-tag offline">Offline</span>
+                        <span *ngIf="entry.synced === true" class="status-tag synced">Synced</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

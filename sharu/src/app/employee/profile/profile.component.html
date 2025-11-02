@@ -1,0 +1,46 @@
+<div class="profile-container">
+    <h2>👤 User Profile</h2>
+
+    <div *ngIf="isLoading" class="loading-message">Loading profile details...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div *ngIf="userProfile && !isLoading" class="profile-card">
+        <div class="profile-header">
+            <div class="avatar-icon">{{ getAvatarInitial() }}</div>
+            <h3>{{ userProfile.name }}</h3>
+        </div>
+
+        <div class="details-section">
+            <h4>Account Details</h4>
+
+            <div class="detail-item">
+                <span class="label">Employee ID:</span>
+                <span class="value">{{ userProfile.employeeId }}</span>
+            </div>
+
+            <div class="detail-item">
+                <span class="label">Email:</span>
+                <span class="value">{{ userProfile.email }}</span>
+            </div>
+
+            <div class="detail-item">
+                <span class="label">Role:</span>
+                <span class="value role-tag {{ userProfile.role | lowercase }}">{{ userProfile.role }}</span>
+            </div>
+
+            <div class="detail-item">
+                <span class="label">Account ID:</span>
+                <span class="value user-id">{{ userProfile._id }}</span>
+            </div>
+
+            <div class="detail-item">
+                <span class="label">Member Since:</span>
+                <span class="value">{{ userProfile.createdAt | date:'fullDate' }}</span>
+            </div>
+        </div>
+
+        <div class="action-footer">
+            <!-- <button class="edit-button" disabled>Edit Profile (Feature Pending)</button> -->
+        </div>
+    </div>
+</div>

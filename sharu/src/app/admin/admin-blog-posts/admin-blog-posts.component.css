@@ -1,0 +1,121 @@
+.blog-container {
+    padding: 30px;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+h2 {
+    color: #dc3545;
+    /* Admin accent color */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.admin-note {
+    text-align: center;
+    font-style: italic;
+    color: #6c757d;
+    margin-bottom: 25px;
+}
+
+/* --- VERTICAL STACKING --- */
+.posts-grid {
+    display: flex;
+    flex-direction: column;
+    /* Stack vertically */
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.blog-card {
+    position: relative;
+    /* CRITICAL for absolute positioning of delete button */
+    overflow: hidden;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card h3 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    border-bottom: 1px dotted #eee;
+    padding-bottom: 5px;
+}
+
+.blog-meta {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.blog-preview {
+    line-height: 1.6;
+    color: #495057;
+}
+
+
+/* --- DELETE BUTTON HOVER EFFECT --- */
+
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 1;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+
+    /* HIDE BY DEFAULT */
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show button when card is hovered */
+.blog-card:hover .delete-button {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.delete-button:hover {
+    background: #c82333;
+}
+
+.loading-message,
+.error-message,
+.empty-message {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: #777;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+}

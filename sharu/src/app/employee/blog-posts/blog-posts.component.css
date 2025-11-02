@@ -1,0 +1,202 @@
+.blog-container {
+    padding: 30px;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+h2 {
+    color: #1976d2;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* --- LOADING / ERROR / FORM SECTIONS --- */
+.loading-message,
+.error-message {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.1rem;
+}
+
+.new-post-form-section {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.post-title-input,
+.post-content-textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.new-post-form-section button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.new-post-form-section button:disabled {
+    background-color: #a0c9e0;
+    cursor: not-allowed;
+}
+
+/* --- TABS --- */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tabs button {
+    background-color: transparent;
+    border: none;
+    padding: 12px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #6c757d;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    flex-grow: 1;
+}
+
+.tabs button.active {
+    color: #1976d2;
+    border-bottom: 2px solid #1976d2;
+    font-weight: 600;
+}
+
+/* --- BLOG LIST (Vertical Stacking) --- */
+.posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.blog-card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    /* Takes 100% of the container width */
+    max-width: 900px;
+    /* Limits size on large screens */
+    margin: 0 auto;
+
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card h3 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    border-bottom: 1px dotted #eee;
+    padding-bottom: 5px;
+}
+
+.blog-meta {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.blog-preview {
+    line-height: 1.5;
+    color: #495057;
+    overflow: hidden;
+}
+
+/* --- DELETE BUTTON HOVER EFFECT --- */
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    line-height: 1;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.blog-card:hover .delete-button {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* --- FLOATING ACTION BUTTON (FAB) POSITIONING --- */
+.fab {
+    position: fixed;
+    bottom: 80px;
+    right: 25px;
+    z-index: 1000;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* --- MOBILE OPTIMIZATION (Ensure Full Screen Width) --- */
+@media (max-width: 768px) {
+    .blog-container {
+        padding: 10px;
+        /* Reduced container padding */
+    }
+
+    /* ⬅️ CRITICAL: Ensure card width respects the full mobile screen space */
+    .blog-card {
+        width: 100%;
+        max-width: 100%;
+        /* Removes desktop maximum */
+        padding: 15px;
+        /* Reduced card padding */
+    }
+
+    .blog-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .fab {
+        bottom: 75px;
+    }
+}

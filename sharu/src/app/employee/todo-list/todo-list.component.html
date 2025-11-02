@@ -1,0 +1,37 @@
+<div class="todo-list-container">
+    <h2>📋 My To-do List</h2>
+
+    <div *ngIf="isLoading" class="loading-message">Loading tasks...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div class="new-task-form">
+        <input [(ngModel)]="newTask" (keyup.enter)="addTodo()" placeholder="Add a new task..." class="task-input">
+        <button (click)="addTodo()" [disabled]="!newTask.trim()">Add Task</button>
+    </div>
+
+    <ul class="task-list" *ngIf="!isLoading">
+        <li *ngFor="let todo of todos" [class.completed]="todo.completed">
+            <div class="task-item">
+                <input type="checkbox" [checked]="todo.completed" (change)="toggleCompleted(todo)">
+
+                <span #taskSpan class="task-text" contenteditable="true" (blur)="onTaskBlur(todo, taskSpan)">
+                    {{ todo.task }}
+                </span>
+
+                <!-- Offline/Synced tag (visible only when offline) -->
+                <span *ngIf="!isOnline" class="status-tag" [ngClass]="isSynced(todo) ? 'synced' : 'offline'">
+                    {{ isSynced(todo) ? 'Synced' : 'Offline' }}
+                </span>
+
+                <button class="delete-button" (click)="deleteTodo(todo._id)">
+                    &times;
+                </button>
+            </div>
+            <span class="created-at">Created: {{ todo.createdAt | date:'short' }}</span>
+        </li>
+    </ul>
+
+    <p *ngIf="todos.length === 0 && !isLoading" class="empty-list-message">
+        Great job! Your to-do list is empty.
+    </p>
+</div>

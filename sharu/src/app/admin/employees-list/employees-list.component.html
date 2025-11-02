@@ -1,0 +1,122 @@
+<div class="hr-dashboard-container">
+    <h2>Employees List & Activity Overview</h2>
+
+    <div class="filter-controls-wrapper">
+        <div class="header-actions">
+            <button (click)="openCreateModal()" class="create-user-button">
+                ➕ Create New User
+            </button>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label for="text-search">Search (Name/ID):</label>
+                <input id="text-search" [(ngModel)]="filterText" (ngModelChange)="applyFilters()"
+                    placeholder="Name or Employee ID" class="filter-input">
+            </div>
+
+            <div class="filter-group">
+                <label for="activity-status">Activity Status:</label>
+                <select id="activity-status" [(ngModel)]="filterStatus" (ngModelChange)="applyFilters()"
+                    class="filter-select">
+                    <option value="all">All</option>
+                    <option value="high_activity">High Activity (>10)</option>
+                    <option value="low_activity">Low Activity (≤2)</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="sort-by">Sort By:</label>
+                <select id="sort-by" [(ngModel)]="filterSort" (ngModelChange)="applyFilters()" class="filter-select">
+                    <option value="name_asc">Name (A-Z)</option>
+                    <option value="activities_desc">Total Activities (High-Low)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="isLoading" class="loading-message">Fetching employee data...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div *ngIf="!isLoading && !error" class="employee-table-wrapper">
+        <table class="employee-table">
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>ID / Email</th>
+                    <th>Role</th>
+                    <th>Total Activities Logged</th>
+                    <th>Member Since</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of filteredEmployees">
+                    <td>{{ employee.name }}</td>
+                    <td>
+                        <strong>{{ employee.employeeId }}</strong><br>
+                        <span class="employee-email">{{ employee.email }}</span>
+                    </td>
+                    <td><span class="role-tag {{ employee.role | lowercase }}">{{ employee.role }}</span></td>
+                    <td>
+                        <span
+                            [ngClass]="{'high-activity': employee.totalActivities > 10, 'low-activity': employee.totalActivities <= 2}">
+                            {{ employee.totalActivities }}
+                        </span>
+                    </td>
+                    <td>{{ employee.createdAt | date: 'mediumDate' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p *ngIf="filteredEmployees.length === 0" class="no-results-message">
+            No employees match the current filters.
+        </p>
+    </div>
+</div>
+
+<div *ngIf="isModalOpen" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Create New User Account</h3>
+            <button class="close-button" (click)="closeCreateModal()">&times;</button>
+        </div>
+
+        <form (ngSubmit)="submitNewUser()">
+            <div class="form-group">
+                <label for="new-employeeId">Employee ID</label>
+                <input id="new-employeeId" [(ngModel)]="newUserData.employeeId" name="employeeId" required
+                    autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="new-name">Employee Name</label>
+                <input id="new-name" [(ngModel)]="newUserData.name" name="name" required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="new-email">Email</label>
+                <input id="new-email" type="email" [(ngModel)]="newUserData.email" name="email" required
+                    autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="new-password">Temporary Password</label>
+                <input id="new-password" type="password" [(ngModel)]="newUserData.password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="new-role">Role</label>
+                <select id="new-role" [(ngModel)]="newUserData.role" name="role" required>
+                    <option value="Employee">Employee</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
+
+            <div *ngIf="modalError" class="alert error">{{ modalError }}</div>
+            <div *ngIf="modalSuccess" class="alert success">{{ modalSuccess }}</div>
+
+            <button type="submit" class="submit-button" [disabled]="isSubmittingUser || modalSuccess">
+                <span *ngIf="!isSubmittingUser">Create User</span>
+                <span *ngIf="isSubmittingUser">Creating...</span>
+            </button>
+        </form>
+    </div>
+</div>

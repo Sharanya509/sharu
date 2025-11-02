@@ -1,0 +1,163 @@
+{
+    "name": "Sharu PWA",
+    "id": "/",
+    "short_name": "SHARU",
+    "description": "Social & Human Activity Recording Utility",
+    "theme_color": "#1976d2",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "display_override": [
+        "standalone",
+        "fullscreen"
+    ],
+    "scope": "/",
+    "start_url": "/",
+    "lang": "en-US",
+    "orientation": "portrait-primary",
+    "categories": [
+        "business",
+        "productivity"
+    ],
+    "icons": [
+        {
+            "src": "assets/icons/android/android-launchericon-72-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/icons/android/android-launchericon-96-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/icons/ios/128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/icons/android/android-launchericon-144-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/icons/ios/152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/icons/ios/180.png",
+            "sizes": "180x180",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/icons/android/android-launchericon-192-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icons/ios/256.png",
+            "sizes": "256x256",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/icons/android/android-launchericon-512-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icons/sharu.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/icons/sharu.ico",
+            "sizes": "any",
+            "type": "image/x-icon",
+            "purpose": "any"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Dashboard",
+            "short_name": "Dashboard",
+            "description": "Dashboard",
+            "url": "/dashboard",
+            "icons": [
+                {
+                    "src": "assets/icons/ios/180.png",
+                    "sizes": "180x180",
+                    "type": "image/png",
+                    "purpose": "any"
+                }
+            ]
+        },
+        {
+            "name": "New Timesheet",
+            "short_name": "Timesheet",
+            "description": "Log hours quickly",
+            "url": "/timesheet",
+            "icons": [
+                {
+                    "src": "assets/icons/android/android-launchericon-144-144.png",
+                    "sizes": "144x144",
+                    "type": "image/png",
+                    "purpose": "any"
+                }
+            ]
+        },
+        {
+            "name": "Log Activity",
+            "short_name": "Activity",
+            "description": "Open activity logs",
+            "url": "/logs",
+            "icons": [
+                {
+                    "src": "assets/icons/android/android-launchericon-96-96.png",
+                    "sizes": "96x96",
+                    "type": "image/png",
+                    "purpose": "any"
+                }
+            ]
+        },
+        {
+            "name": "My Todos",
+            "short_name": "Todos",
+            "description": "Open your to-do list",
+            "url": "/todo",
+            "icons": [
+                {
+                    "src": "assets/icons/ios/152.png",
+                    "sizes": "152x152",
+                    "type": "image/png",
+                    "purpose": "any"
+                }
+            ]
+        },
+        {
+            "name": "Profile",
+            "short_name": "Profile",
+            "description": "View or edit your profile",
+            "url": "/profile",
+            "icons": [
+                {
+                    "src": "assets/icons/ios/128.png",
+                    "sizes": "128x128",
+                    "type": "image/png",
+                    "purpose": "any"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": []
+}

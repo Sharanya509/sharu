@@ -1,0 +1,14 @@
+# Netlify Configuration for Angular PWA
+[build]
+  # The root directory for the build process (where package.json and angular.json are located)
+  base    = "sharu"
+  # The command to build the Angular application for production
+  command = "npm install && ng build --configuration=production"
+  # The directory containing the final static assets to deploy
+  publish = "dist/sharu/browser"
+
+[[redirects]]
+  # Redirects all traffic not matching an asset to index.html for Angular routing
+  from = "/*"
+  to = "/index.html"
+  status = 200

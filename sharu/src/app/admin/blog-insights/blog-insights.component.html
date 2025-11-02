@@ -1,0 +1,46 @@
+<div class="insights-container">
+    <h2>📊 Blog Engagement Insights</h2>
+
+    <div *ngIf="isLoading" class="loading-message">Loading blog analytics data...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div *ngIf="insights && !isLoading" class="insights-grid">
+
+        <div class="insight-card total">
+            <h3>Total Blog Posts</h3>
+            <p class="metric-value">{{ insights.totalPosts | number }}</p>
+            <p class="metric-description">Total contributions from all employees.</p>
+        </div>
+
+        <div class="insight-card authors">
+            <h3>Unique Blog Authors</h3>
+            <p class="metric-value">{{ insights.uniqueAuthors | number }}</p>
+            <p class="metric-description">Number of unique employees who have posted.</p>
+        </div>
+
+        <div class="insight-card top-bloggers">
+            <h3>🥇 Top 5 Most Active Bloggers</h3>
+            <ul class="ranking-list">
+                <li *ngFor="let blogger of insights.topBloggers; let i = index">
+                    <span class="rank">{{ i + 1 }}.</span>
+                    {{ blogger._id }}
+                    <span class="count">({{ blogger.postCount }} posts)</span>
+                </li>
+            </ul>
+            <p *ngIf="insights.topBloggers.length === 0" class="no-data-message">No posts tracked yet.</p>
+        </div>
+
+        <div class="insight-card trend">
+            <h3>Posts Created (Last 30 Days)</h3>
+            <ul class="trend-list">
+                <li *ngFor="let day of insights.postsLast30Days">
+                    <span class="date">{{ day._id | date: 'MMM d' }}</span>:
+                    <span class="count">{{ day.count }} posts</span>
+                </li>
+            </ul>
+            <p *ngIf="insights.postsLast30Days.length === 0" class="no-data-message">No activity in the past 30 days.
+            </p>
+        </div>
+
+    </div>
+</div>

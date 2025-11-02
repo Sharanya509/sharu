@@ -1,0 +1,66 @@
+<header class="app-toolbar">
+  <a routerLink="/" class="app-title">
+    <img src="assets/icons/sharu.svg" alt="Sharu" class="app-logo" />
+    Sharu PWA
+  </a>
+
+  <nav class="main-nav desktop-nav">
+    <ng-container *ngIf="authService.isEmployee()">
+      <a *ngFor="let item of employeeNav" [routerLink]="item.path" routerLinkActive="active-link" class="nav-link">
+        {{ item.label }}
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="authService.isAdmin()">
+      <a *ngFor="let item of adminNav" [routerLink]="item.path" routerLinkActive="active-link" class="nav-link">
+        {{ item.label }}
+      </a>
+    </ng-container>
+  </nav>
+
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="authService.isLoggedIn(); else loginButtonTemplate">
+    <div class="user-menu-container">
+      <button class="user-icon" (click)="toggleMenu()" aria-label="User menu">
+        👤
+      </button>
+
+      <div *ngIf="isMenuOpen" class="submenu">
+        <a routerLink="/profile" (click)="toggleMenu()">Profile</a>
+
+        <a (click)="authService.logout(); toggleMenu()" class="logout-link">
+          Log out 🚪
+        </a>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loginButtonTemplate>
+    <button class="login-button" routerLink="/login" aria-label="Navigate to login page">
+      Login
+    </button>
+  </ng-template>
+</header>
+
+<main class="content-area">
+  <router-outlet></router-outlet>
+</main>
+
+<nav class="bottom-nav" *ngIf="isMobile && authService.isLoggedIn()">
+  <ng-container *ngIf="authService.isEmployee()">
+    <a *ngFor="let item of employeeNavMobile" [routerLink]="item.path" routerLinkActive="bottom-active"
+      class="bottom-nav-item">
+      <span class="icon">{{ item.icon }}</span>
+      <span class="label">{{ item.label }}</span>
+    </a>
+  </ng-container>
+
+  <ng-container *ngIf="authService.isAdmin()">
+    <a *ngFor="let item of adminNavMobile" [routerLink]="item.path" routerLinkActive="bottom-active"
+      class="bottom-nav-item">
+      <span class="icon">{{ item.icon }}</span>
+      <span class="label">{{ item.label }}</span>
+    </a>
+  </ng-container>
+</nav>

@@ -1,0 +1,319 @@
+.logs-container {
+    padding: 30px;
+    max-width: 950px;
+    margin: 20px auto;
+}
+
+h2 {
+    color: #1976d2;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* --- LOGGING ACTION BUTTON --- */
+.log-actions {
+    text-align: right;
+    margin-bottom: 25px;
+}
+
+.log-new-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.log-new-button:hover {
+    background-color: #218838;
+}
+
+/* --- NEW ACTIVITY LOG FORM STYLING --- */
+.log-form-card {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.log-form-card h3 {
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.log-form-card input[type="text"],
+.log-form-card input[type="number"],
+.log-form-card input[type="date"],
+.log-form-card input[type="time"],
+.log-form-card select,
+.log-form-card textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.log-form-card input:focus,
+.log-form-card select:focus,
+.log-form-card textarea:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
+    outline: none;
+}
+
+.log-form-card textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Date and Time Group for side-by-side layout */
+.datetime-group .datetime-inputs {
+    display: flex;
+    gap: 15px;
+}
+
+.datetime-group .datetime-inputs input {
+    width: 50%;
+}
+
+.input-validation-error {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.log-form-card button[type="submit"] {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+.log-form-card button[type="submit"]:disabled {
+    background-color: #a0c9e0;
+    cursor: not-allowed;
+}
+
+/* --- HISTORY DISPLAY STYLING (For context, assuming previous history styles exist) --- */
+.activity-history-section {
+    padding-top: 20px;
+}
+
+.log-list {
+    list-style: none;
+    padding: 0;
+}
+
+.log-item {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    background-color: white;
+}
+
+/* ... (rest of history list styles) ... */
+
+.log-timestamp {
+    background-color: #e9ecef;
+    padding: 15px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    min-width: 180px;
+    flex-shrink: 0;
+    border-right: 1px solid #ddd;
+}
+
+.log-content {
+    padding: 15px;
+    flex-grow: 1;
+}
+
+.log-action {
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 5px 0;
+}
+
+.log-details {
+    margin: 0;
+    color: #666;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.no-logs-message {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    font-style: italic;
+    border: 1px dashed #ddd;
+    border-radius: 6px;
+}
+
+/* sharu/src/app/employee/activity-logs/activity-logs.component.css (Add or modify existing) */
+
+/* ... (existing styles) ... */
+
+/* Styling for hours input to make it narrower */
+.form-group.hours-group input {
+    width: 150px;
+    text-align: center;
+}
+
+/* Styling for displaying hours in the log list */
+.log-hours {
+    font-weight: 700;
+    color: #007bff;
+    margin-left: 10px;
+    background-color: #e0f0ff;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* sharu/src/app/employee/activity-logs/activity-logs.component.css (Add these styles) */
+
+/* --- NEW LOG ENTRY STYLES --- */
+
+/* Highlight the entire list item temporarily */
+.log-item.highlighted {
+    background-color: #e6fff3;
+    /* Very light green background */
+    border-color: #28a745;
+}
+
+/* Style for the 'New Log entry' label */
+.new-log-label {
+    background-color: #28a745;
+    /* Success green */
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-left: 15px;
+    /* Optional: Animate the label appearance */
+    animation: pulse-border 1.5s infinite;
+}
+
+@keyframes pulse-border {
+    0% {
+        box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 5px rgba(40, 167, 69, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+    }
+}
+
+/* --- Ensure Hours Input Styling is defined (from previous steps) --- */
+.form-group.hours-group input {
+    width: 150px;
+    text-align: center;
+}
+
+/* ... (rest of the existing CSS) ... */
+/* sharu/src/app/employee/activity-logs/activity-logs.component.css */
+
+/* ... (Existing desktop styles) ... */
+
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 768px) {
+    .logs-container {
+        padding: 10px;
+        max-width: 100%;
+        /* Use full width */
+    }
+
+    /* 1. Stack the Timestamp and Content vertically */
+    .log-item {
+        flex-direction: column;
+        /* ⬅️ Stacks the columns */
+    }
+
+    /* 2. Style the timestamp block to look like a header */
+    .log-timestamp {
+        min-width: 100%;
+        text-align: center;
+        background-color: #1976d2;
+        /* Primary color */
+        color: white;
+        border-right: none;
+        border-bottom: 1px solid #0d47a1;
+        border-radius: 6px 6px 0 0;
+    }
+
+    .log-content {
+        padding: 15px 10px;
+    }
+
+    /* 3. Stack date/time inputs in the form */
+    .datetime-group .datetime-inputs {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .datetime-group .datetime-inputs input {
+        width: 100%;
+    }
+
+    /* Adjust hours input width */
+    .form-group.hours-group input {
+        width: 100%;
+    }
+}
+
+/* Offline/Synced status tags */
+.status-tag {
+    margin-left: 12px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.status-tag.offline {
+    background-color: #e0e0e0;
+    color: #666;
+}
+
+.status-tag.synced {
+    background-color: #dff0d8;
+    color: #2a7a2a;
+}

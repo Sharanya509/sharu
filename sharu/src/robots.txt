@@ -1,0 +1,10 @@
+# robots.txt for Sharu PWA
+# Allow all crawlers full access by default. Replace the Sitemap URL with your production sitemap URL.
+
+User-agent: *
+Disallow:
+
+# Provide the absolute URL to your sitemap (replace example.com)
+Sitemap: https://sharu-pwa.netlify.app/sitemap.xml
+# Optional: specify canonical host if you have a preferred domain
+# Host: sharu-pwa.netlify.app

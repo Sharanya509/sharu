@@ -1,0 +1,94 @@
+<div class="logs-container">
+    <h2>📜 Activity Logs</h2>
+
+    <div *ngIf="isLoading" class="loading-message">Loading activity history...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div class="log-actions">
+        <button (click)="logFormVisible = !logFormVisible" class="log-new-button">
+            {{ logFormVisible ? 'Cancel Logging' : '➕ Log New Activity' }}
+        </button>
+    </div>
+
+    <div *ngIf="logFormVisible" class="log-form-card">
+        <h3>Log New Activity</h3>
+        <form (ngSubmit)="submitNewActivity()">
+
+            <div class="form-group datetime-group">
+                <label>Activity Date & Time (Must be in the past):</label>
+                <div class="datetime-inputs">
+                    <input type="date" [(ngModel)]="newDate" name="newDate" required [max]="maxDate">
+                    <input type="time" [(ngModel)]="newTime" name="newTime" required>
+                </div>
+                <p *ngIf="!isDateTimeValid" class="input-validation-error">
+                    Selected time must be in the past.
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="action-select">Action Taken:</label>
+                <select id="action-select" [(ngModel)]="selectedAction" name="selectedAction" required>
+                    <option *ngFor="let option of activityOptions" [value]="option"
+                        [disabled]="option === activityOptions[0]">
+                        {{ option }}
+                    </option>
+                    <option value="Other">Other (Specify Below)</option>
+                </select>
+            </div>
+
+            <div class="form-group" *ngIf="showOtherActionInput">
+                <label for="other-action">Specify Other Action Title:</label>
+                <input id="other-action" [(ngModel)]="otherAction" name="otherAction" required
+                    placeholder="Enter custom action title">
+            </div>
+
+            <div class="form-group hours-group">
+                <label for="hours">Hours Worked (0.5 to 9.5):</label>
+                <input type="number" id="hours" [(ngModel)]="newHours" name="newHours" required min="0.5" max="9.5"
+                    step="0.5" placeholder="e.g., 4.0">
+            </div>
+
+            <div class="form-group">
+                <label for="details">Details (Optional):</label>
+                <textarea id="details" [(ngModel)]="newDetails" name="newDetails"
+                    placeholder="Provide more context..."></textarea>
+            </div>
+
+            <button type="submit"
+                [disabled]="isSubmitting || selectedAction === activityOptions[0] || newHours < 0.5 || newHours > 9.5 || !isDateTimeValid">
+                <span *ngIf="!isSubmitting">Submit Log</span>
+                <span *ngIf="isSubmitting">Submitting...</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="activity-history-section">
+        <h3>Recent History</h3>
+
+        <div *ngIf="logs.length === 0 && !isLoading" class="no-logs-message">
+            You have no activity logs yet.
+        </div>
+
+        <ul class="log-list" *ngIf="logs.length > 0 && !isLoading">
+            <li *ngFor="let log of logs" class="log-item" [class.highlighted]="log.isNew">
+                <div class="log-timestamp">
+                    {{ log.timestamp | date:'medium' }}
+                </div>
+                <div class="log-content">
+                    <p class="log-action">
+                        {{ log.action }}
+                        <span class="log-hours">({{ log.hours }} hrs)</span>
+                        <span *ngIf="log.isNew" class="new-log-label">New Log entry</span>
+                        <!-- Offline/Synced tag (only visible when app is offline) -->
+                        <span *ngIf="!isOnline" class="status-tag" [ngClass]="isSynced(log) ? 'synced' : 'offline'">
+                            {{ isSynced(log) ? 'Synced' : 'Offline' }}
+                        </span>
+                    </p>
+                    <p class="log-details" *ngIf="log.details && log.details !== 'No details provided'">
+                        {{ log.details }}
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="blog-container">
+    <h2>👑 Blog Review and Management</h2>
+
+    <div *ngIf="isLoading" class="loading-message">Loading all blog posts...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <p class="admin-note">Showing all posts from all employees, sorted by most recent.</p>
+
+    <div class="blog-list">
+        <ng-container>
+            <div *ngIf="allBlogs.length; else noBlogsFound" class="posts-grid">
+                <div *ngFor="let blog of allBlogs" class="blog-card">
+
+                    <button class="delete-button" (click)="deletePost(blog._id, blog.authorName)"
+                        title="Delete Any Post">
+                        &times;
+                    </button>
+
+                    <h3>{{ blog.title }}</h3>
+                    <p class="blog-meta">
+                        By **{{ blog.authorName }}** (ID: {{ blog.userId }}) on {{ blog.createdAt | date:'mediumDate' }}
+                    </p>
+                    <p class="blog-preview">{{ blog.content.substring(0, 200) }}...</p>
+                </div>
+            </div>
+            <ng-template #noBlogsFound>
+                <p class="empty-message">No blog posts have been created yet.</p>
+            </ng-template>
+        </ng-container>
+    </div>
+</div>

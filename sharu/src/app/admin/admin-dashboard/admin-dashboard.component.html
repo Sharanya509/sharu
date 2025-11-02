@@ -1,0 +1,24 @@
+<div class="admin-dashboard-container">
+
+    <div class="dashboard-intro">
+        <h2>Welcome Back, {{ adminName }}!</h2>
+        <p>
+            This is your central control panel. Use the links below or the main navigation
+            to access HR functions, user management, and platform analytics.
+        </p>
+    </div>
+
+    <h3>Quick Actions</h3>
+
+    <div class="quick-links-grid">
+        <a *ngFor="let link of quickLinks" [routerLink]="link.path" class="link-card">
+            <span class="link-icon">{{ link.icon }}</span>
+            <h4>{{ link.label }}</h4>
+            <p class="link-description">View full list and perform CRUD operations.</p>
+        </a>
+    </div>
+
+    <div class="admin-notice">
+        <p>Remember: All actions performed here are logged and require Admin privileges. Proceed with caution.</p>
+    </div>
+</div>
